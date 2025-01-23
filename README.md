@@ -9,8 +9,8 @@ Actualmente se encuentra en desarrollo y esta incompleto el proyecto
 - 🎮 Movimiento del personaje controlado por el usuario.
 - 👾 Enemigos que siguen al jugador.
 - 🚀 Compatible con cualquier IDE que soporte Java
-  
-- 🔧 Código comentado en mantenimiento
+---
+- 🔧 Código actulamente en mantenimiento
 
 ## Cómo jugar
 1. Clona este repositorio:
