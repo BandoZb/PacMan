@@ -25,5 +25,7 @@ public class Tablero {
     public void setPosicionY(int posicionY) {
         this.posicionY = posicionY;
     }
+    
+
 
 }
