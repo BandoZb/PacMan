@@ -5,12 +5,40 @@ public class Tablero {
     private int posicionX;
     private int posicionY;
     private String[][] tablero;
+    
+    private String objetivo = "O";
 
     public Tablero(int posicionY, int posicionX) {
         this.posicionY = posicionY;
         this.posicionX = posicionX;
         this.tablero = new String[posicionY][posicionX];
     }
+
+    public int getPosicionX() {
+        return posicionX;
+    }
+
+    public void setPosicionX(int posicionX) {
+        this.posicionX = posicionX;
+    }
+
+    public int getPosicionY() {
+        return posicionY;
+    }
+
+    public void setPosicionY(int posicionY) {
+        this.posicionY = posicionY;
+    }
+
+    public String getObjetivos() {
+        return objetivo;
+    }
+
+    public void setObjetivos(String objetivos) {
+        this.objetivo = objetivo;
+    }
+    
+    
 
     public void crearTablero() {
 
@@ -90,6 +118,14 @@ public class Tablero {
         tablero[2][7] = ".";
         tablero[2][11] = ".";
         tablero[2][12] = ".";
+        
+        // Objetivos
+        
+        tablero[2][1] = objetivo;
+        tablero[2][15] = objetivo;
+        tablero[13][2] = objetivo;
+        tablero[13][15] = objetivo;
+        
 
     }
 
