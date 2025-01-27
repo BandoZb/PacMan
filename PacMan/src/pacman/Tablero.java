@@ -3,6 +3,7 @@ package pacman;
 import pacman.Pacman;
 import pacman.Fantasmas;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 public class Tablero {
 
@@ -18,7 +19,11 @@ public class Tablero {
     private String objetivo = "O";
     private int tiempo = 90;
     private int puntuacion = 0;
-
+    
+    private final Semaphore semaforoTablero = new Semaphore(1);
+        
+    private String direccionPacman = "ARRIBA"; 
+    
     public Tablero(int posicionY, int posicionX) {
         this.posicionY = posicionY;
         this.posicionX = posicionX;
@@ -206,6 +211,10 @@ public class Tablero {
         System.out.println("Puntuacion : "+puntuacion);
         System.out.println("Tiempo : "+tiempo);
         System.out.println("Vidas : "+pacman.getVidasRestantes());
+    }
+    
+        public void setDireccionPacman(String direccionPacman) {
+        this.direccionPacman = direccionPacman;
     }
 
 }
