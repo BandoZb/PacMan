@@ -49,6 +49,8 @@ public class Main {
             
             
             
+            
+        // poner puntuacion < 200 para ejecutar el bucle 
         }while(puntuacion == 200);
         
         String dificultadPalabra;

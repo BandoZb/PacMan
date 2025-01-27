@@ -1,11 +1,20 @@
 package pacman;
 
+import pacman.Pacman;
+import pacman.Fantasmas;
+import java.util.Random;
+
 public class Tablero {
 
     private int posicionX;
     private int posicionY;
     private String[][] tablero;
-    
+
+    private Pacman pacman = new Pacman();
+    private Fantasmas f1 = new Fantasmas();
+    private Fantasmas f2 = new Fantasmas();
+    private Fantasmas f3 = new Fantasmas();
+
     private String objetivo = "O";
 
     public Tablero(int posicionY, int posicionX) {
@@ -37,8 +46,6 @@ public class Tablero {
     public void setObjetivos(String objetivos) {
         this.objetivo = objetivo;
     }
-    
-    
 
     public void crearTablero() {
 
@@ -47,13 +54,11 @@ public class Tablero {
                 tablero[i][j] = ".";
             }
         }
-        
+
         // Huecos del la zona de los fantasmas
-        
         for (int i = 7; i < 12; i++) {
-            tablero[6][i] = " "; 
+            tablero[6][i] = " ";
         }
-        
 
         for (int i = 0; i < posicionY; i++) {
             tablero[i][0] = "|";
@@ -118,14 +123,18 @@ public class Tablero {
         tablero[2][7] = ".";
         tablero[2][11] = ".";
         tablero[2][12] = ".";
-        
+
         // Objetivos
-        
         tablero[2][1] = objetivo;
         tablero[2][15] = objetivo;
         tablero[13][2] = objetivo;
         tablero[13][15] = objetivo;
-        
+
+        // Creacion Fantasmas
+        fantasmasRandoms();
+
+        // Creacion PacMan
+        tablero[13][9] = pacman.getNombre();
 
     }
 
@@ -136,6 +145,44 @@ public class Tablero {
             }
             System.out.println();
         }
+    }
+
+    public void fantasmasRandoms() {
+
+        Random random = new Random();
+
+        boolean interruptorRandom1 = false;
+        boolean interruptorRandom2 = false;
+
+        tablero[6][9] = f3.getNombre();
+
+        do {
+
+            if (!interruptorRandom1) {
+                int posXrandomf1 = random.nextInt(15) + 1;
+                int posYrandomf1 = random.nextInt(19) + 1;
+
+                if (tablero[posXrandomf1][posYrandomf1].equals("|") || tablero[posXrandomf1][posYrandomf1].equals("_") || tablero[posXrandomf1][posYrandomf1].equals(objetivo) || tablero[posXrandomf1][posYrandomf1].equals(pacman.getNombre())) {
+                    interruptorRandom1 = false;
+                } else {
+                    interruptorRandom1 = true;
+                    tablero[posXrandomf1][posYrandomf1] = f1.getNombre();
+                }
+            }
+
+            if (!interruptorRandom2) {
+                int posXrandomf2 = random.nextInt(15) + 1;
+                int posYrandomf2 = random.nextInt(19) + 1;
+
+                if (tablero[posXrandomf2][posYrandomf2].equals("|") || tablero[posXrandomf2][posYrandomf2].equals("_") || tablero[posXrandomf2][posYrandomf2].equals(objetivo) || tablero[posXrandomf2][posYrandomf2].equals(pacman.getNombre())) {
+                    interruptorRandom2 = false;
+                } else {
+                    interruptorRandom2 = true;
+                    tablero[posXrandomf2][posYrandomf2] = f2.getNombre();
+                }
+            }
+
+        } while (!interruptorRandom1 || !interruptorRandom2);
     }
 
 }
