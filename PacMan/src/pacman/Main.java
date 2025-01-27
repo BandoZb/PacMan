@@ -7,9 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int puntuacion = 0;
-        
-        
+
         Tablero tablero = new Tablero(15,19);
         Scanner sc = new Scanner(System.in);
 
@@ -32,6 +30,16 @@ public class Main {
          * cada medio segundo
          */
         Pacman pacman = new Pacman();
+        if(dificultad == 1){
+            pacman.setVidasRestantes(3);
+        }
+        else if(dificultad == 2){
+            pacman.setVidasRestantes(2);
+        }
+        else{
+            pacman.setVidasRestantes(1);
+        }
+        
         
         /**
          * Aqui los fantasmas se crean, hay q añadirle un sleep de 500ms para q se 
@@ -43,15 +51,23 @@ public class Main {
         
         do{
             
+            f1.start();
+            f2.start();
+            f3.start();
+            pacman.start();
+            
+            
+            
             tablero.mostrarTablero();
-            System.out.println("");
-            System.out.println("Puntuacion : "+puntuacion);
+            tablero.mostrarEstadisticas();
             
             
             
             
-        // poner puntuacion < 200 para ejecutar el bucle 
-        }while(puntuacion == 200);
+        /*
+        }while(tablero.juegoTerminado());
+        */
+        }while(tablero.getPuntuacion() == 200);
         
         String dificultadPalabra;
         if(dificultad == 1){

@@ -16,6 +16,8 @@ public class Tablero {
     private Fantasmas f3 = new Fantasmas();
 
     private String objetivo = "O";
+    private int tiempo = 90;
+    private int puntuacion = 0;
 
     public Tablero(int posicionY, int posicionX) {
         this.posicionY = posicionY;
@@ -183,6 +185,27 @@ public class Tablero {
             }
 
         } while (!interruptorRandom1 || !interruptorRandom2);
+    }
+    
+
+
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+    
+    public boolean juegoTerminado(){
+        return ((pacman.getObjetivosConsumidos() == 4) || (tiempo == 0) || (pacman.getVidasRestantes() == 0) || ( puntuacion == 180));
+    } 
+    
+    public void mostrarEstadisticas(){
+        System.out.println("");
+        System.out.println("Puntuacion : "+puntuacion);
+        System.out.println("Tiempo : "+tiempo);
+        System.out.println("Vidas : "+pacman.getVidasRestantes());
     }
 
 }
