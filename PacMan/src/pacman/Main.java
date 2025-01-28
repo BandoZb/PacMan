@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-        Tablero tablero = new Tablero(15,19);
+        Pacman pacman = new Pacman();
+        Tablero tablero = new Tablero(15,19,pacman);
         Scanner sc = new Scanner(System.in);
 
         System.out.println("""
@@ -24,12 +24,6 @@ public class Main {
 
         tablero.crearTablero();
         
-        
-        /**
-         * Pacman aqui nace, hay q añadirle un Sleep de 500ms si quiero q se mueva
-         * cada medio segundo
-         */
-        Pacman pacman = new Pacman();
         if(dificultad == 1){
             pacman.setVidasRestantes(3);
         }
@@ -45,29 +39,28 @@ public class Main {
          * Aqui los fantasmas se crean, hay q añadirle un sleep de 500ms para q se 
          * mueva a la par del PacMan 
          */
-        Fantasmas f1 = new Fantasmas();
-        Fantasmas f2 = new Fantasmas();
-        Fantasmas f3 = new Fantasmas();
+        Fantasmas f1 = new Fantasmas(tablero,6,9);
+        Fantasmas f2 = new Fantasmas(tablero);
+        Fantasmas f3 = new Fantasmas(tablero);
         
         do{
-            
-            f1.start();
-            f2.start();
-            f3.start();
-            pacman.start();
-            
-            
-            
             tablero.mostrarTablero();
             tablero.mostrarEstadisticas();
             
             
             
             
+            
+            
+            
+            
+            
+            
         /*
-        }while(tablero.juegoTerminado());
+        }while(tablero.juegoTerminado()); para q funcione
+        }while(tablero.getPuntuacion() == 200); para solo 1 vez
         */
-        }while(tablero.getPuntuacion() == 200);
+        }while(tablero.juegoTerminado());
         
         String dificultadPalabra;
         if(dificultad == 1){

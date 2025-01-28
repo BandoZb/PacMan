@@ -12,9 +12,6 @@ public class Tablero {
     private String[][] tablero;
 
     private Pacman pacman = new Pacman();
-    private Fantasmas f1 = new Fantasmas();
-    private Fantasmas f2 = new Fantasmas();
-    private Fantasmas f3 = new Fantasmas();
 
     private String objetivo = "O";
     private int tiempo = 90;
@@ -24,9 +21,10 @@ public class Tablero {
 
     private String direccionPacman = "ARRIBA";
 
-    public Tablero(int posicionY, int posicionX) {
+    public Tablero(int posicionY, int posicionX, Pacman pacman) {
         this.posicionY = posicionY;
         this.posicionX = posicionX;
+        this.pacman = pacman;
         this.tablero = new String[posicionY][posicionX];
     }
 
@@ -54,6 +52,15 @@ public class Tablero {
         this.objetivo = objetivo;
     }
 
+    public String[][] getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(String[][] tablero) {
+        this.tablero = tablero;
+    }
+
+    
     public void crearTablero() {
 
         for (int i = 0; i < posicionY; i++) {
@@ -138,7 +145,7 @@ public class Tablero {
         tablero[13][15] = objetivo;
 
         // Creacion Fantasmas
-        fantasmasRandoms();
+        // fantasmasRandoms();
 
         // Creacion PacMan
         tablero[13][9] = pacman.getNombre();
@@ -156,47 +163,6 @@ public class Tablero {
         }
     }
 
-    public void fantasmasRandoms() {
-
-        Random random = new Random();
-
-        boolean interruptorRandom1 = false;
-        boolean interruptorRandom2 = false;
-
-        tablero[6][9] = f3.getNombre();
-
-        do {
-
-            if (!interruptorRandom1) {
-                int posXrandomf1 = random.nextInt(15) + 1;
-                int posYrandomf1 = random.nextInt(19) + 1;
-
-                if (tablero[posXrandomf1][posYrandomf1].equals("F") || tablero[posXrandomf1][posYrandomf1].equals("|") || tablero[posXrandomf1][posYrandomf1].equals("_") || tablero[posXrandomf1][posYrandomf1].equals(objetivo) || tablero[posXrandomf1][posYrandomf1].equals(pacman.getNombre())) {
-                    interruptorRandom1 = false;
-                } else {
-                    interruptorRandom1 = true;
-                    tablero[posXrandomf1][posYrandomf1] = f1.getNombre();
-                    f1.setPosX(posXrandomf1);
-                    f1.setPosY(posYrandomf1);
-                }
-            }
-
-            if (!interruptorRandom2) {
-                int posXrandomf2 = random.nextInt(15) + 1;
-                int posYrandomf2 = random.nextInt(19) + 1;
-
-                if (tablero[posXrandomf2][posYrandomf2].equals("F") || tablero[posXrandomf2][posYrandomf2].equals("|") || tablero[posXrandomf2][posYrandomf2].equals("_") || tablero[posXrandomf2][posYrandomf2].equals(objetivo) || tablero[posXrandomf2][posYrandomf2].equals(pacman.getNombre())) {
-                    interruptorRandom2 = false;
-                } else {
-                    interruptorRandom2 = true;
-                    tablero[posXrandomf2][posYrandomf2] = f2.getNombre();
-                    f2.setPosX(posXrandomf2);
-                    f2.setPosY(posYrandomf2);
-                }
-            }
-
-        } while (!interruptorRandom1 || !interruptorRandom2);
-    }
 
     public int getPuntuacion() {
         return puntuacion;
@@ -221,7 +187,7 @@ public class Tablero {
         this.direccionPacman = direccionPacman;
     }
 
-    private boolean esMovimientoValido(int y, int x, String personaje) {
+    public boolean esMovimientoValido(int y, int x, String personaje) {
         boolean esValido = false;
         if ((x >= 0) && (x < tablero[0].length) && (y >= 0) && (x < tablero[0].length) && (y < tablero.length)) {
 
@@ -284,4 +250,6 @@ public class Tablero {
         }
 
     }
+    
+    
 }
