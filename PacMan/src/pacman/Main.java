@@ -1,84 +1,73 @@
 package pacman;
 
-import pacman.Tablero;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Pacman pacman = new Pacman();
-        Tablero tablero = new Tablero(15,19,pacman);
+        
+        Tablero tablero = new Tablero(15, 19, null);
+        Pacman pacman = new Pacman(tablero);
+        tablero.setPacman(pacman);
         Scanner sc = new Scanner(System.in);
 
         System.out.println("""
-                           Bienvenido al clasico juego del Pacman
+                           Bienvenido al clásico juego del Pacman
                            
                            Elige la dificultad pulsando un número
                            
-                           1.Facil      2.Medio      3.Dificil
+                           1. Fácil      2. Medio      3. Difícil
                            
                            """);
 
         int dificultad = sc.nextInt();
 
         tablero.crearTablero();
+
         
-        if(dificultad == 1){
+        if (dificultad == 1) {
             pacman.setVidasRestantes(3);
-        }
-        else if(dificultad == 2){
+        } else if (dificultad == 2) {
             pacman.setVidasRestantes(2);
-        }
-        else{
+        } else {
             pacman.setVidasRestantes(1);
         }
+
         
-        
-        /**
-         * Aqui los fantasmas se crean, hay q añadirle un sleep de 500ms para q se 
-         * mueva a la par del PacMan 
-         */
-        Fantasmas f1 = new Fantasmas(tablero,6,9);
+        Fantasmas f1 = new Fantasmas(tablero, 6, 9);
         Fantasmas f2 = new Fantasmas(tablero);
         Fantasmas f3 = new Fantasmas(tablero);
+
         
-        do{
+        PedirDireccion pedirDireccion = new PedirDireccion(tablero);
+        pedirDireccion.start();
+
+        
+        f1.start();
+        f2.start();
+        f3.start();
+        pacman.start();
+
+        
+        while (!tablero.juegoTerminado()) {
             tablero.mostrarTablero();
             tablero.mostrarEstadisticas();
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        /*
-        }while(tablero.juegoTerminado()); para q funcione
-        }while(tablero.getPuntuacion() == 200); para solo 1 vez
-        */
-        }while(tablero.juegoTerminado());
-        
-        String dificultadPalabra;
-        if(dificultad == 1){
-            dificultadPalabra = "facil";
-        }
-        else if(dificultad == 2){
-            dificultadPalabra = "medio";
-        }
-        else{
-            dificultadPalabra = "dificil";
-        }
-        
-        System.out.println("Felicidades, has superado la modalidad "+dificultadPalabra);
-        
-        
 
+            try {
+                Thread.sleep(1000); 
+            } catch (InterruptedException e) {
+                System.out.println("Juego interrumpido: " + e.getMessage());
+            }
+        }
+
+        
+        String dificultadPalabra = switch (dificultad) {
+            case 1 -> "fácil";
+            case 2 -> "medio";
+            default -> "difícil";
+        };
+
+        System.out.println("Felicidades, has superado la modalidad " + dificultadPalabra);
     }
-
-
-
 }

@@ -9,11 +9,28 @@ public class Pacman extends Thread{
    private int vidasRestantes;
    private int posX;
    private int posY; 
+   private Tablero tablero;
+
+    public Pacman(Tablero tablero) {
+        this.tablero = tablero;
+    }
+   public Pacman( ) {
+        
+    }
+   
    
    @Override
    public void run() {
        
-       
+       while (!tablero.juegoTerminado()) {
+            tablero.moverPacman();
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
    }
 
     public String getNombre() {

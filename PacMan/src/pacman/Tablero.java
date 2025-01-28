@@ -11,12 +11,12 @@ public class Tablero {
     private int posicionY;
     private String[][] tablero;
 
-    private Pacman pacman = new Pacman();
+    
 
     private String objetivo = "O";
     private int tiempo = 90;
     private int puntuacion = 0;
-
+    private Pacman pacman = new Pacman();
     private final Semaphore semaforoTablero = new Semaphore(1);
 
     private String direccionPacman = "ARRIBA";
@@ -27,6 +27,15 @@ public class Tablero {
         this.pacman = pacman;
         this.tablero = new String[posicionY][posicionX];
     }
+
+    public Pacman getPacman() {
+        return pacman;
+    }
+
+    public void setPacman(Pacman pacman) {
+        this.pacman = pacman;
+    }
+    
 
     public int getPosicionX() {
         return posicionX;
