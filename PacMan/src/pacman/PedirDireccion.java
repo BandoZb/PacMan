@@ -3,10 +3,6 @@ package pacman;
 
 import java.util.Scanner;
 
-/**
- *
- * @author Santaigo Spina
- */
 public class PedirDireccion extends Thread{
     
     private Tablero tablero;
@@ -19,7 +15,7 @@ public class PedirDireccion extends Thread{
     public void run() {
         while(!tablero.juegoTerminado()){
             Scanner sc = new Scanner(System.in);
-            //Pide la direccion, sino se indica ninguna, por defecto va a la derecha
+            
             String direccionIntroducida = sc.next().toUpperCase();
             switch (direccionIntroducida) {
                 case "W": tablero.setDireccionPacman("ARRIBA"); break;
