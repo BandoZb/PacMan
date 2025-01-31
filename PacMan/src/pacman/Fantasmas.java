@@ -61,7 +61,7 @@ public class Fantasmas extends Thread {
 
     public void moverFantasma(int posX, int posY) {
         int movimiento = random.nextInt(4) + 1; // Generar un número entre 1 y 4 para elegir a donde se movera el fantasma
-
+        
         int posXnew = posX;
         int posYnew = posY;
 
@@ -79,11 +79,25 @@ public class Fantasmas extends Thread {
                 posYnew--;
                 break;
         }
-
+             
+        
         // Validar el nuevo movimiento antes de actualizar las coordenadas
-        if (tablero.esMovimientoValido(posYnew, posXnew, nombre)) {
-            posX = posXnew;
-            posY = posYnew;
+        if (tablero.esMovimientoValido(posXnew, posYnew, nombre)) {
+                
+            
+            if(tablero.getTablero()[posXnew][posYnew].equals(" ")){
+                tablero.getTablero()[posXnew][posYnew] = getNombre();
+                tablero.getTablero()[posX][posY] = "";
+            }
+            else{
+                tablero.getTablero()[posXnew][posYnew] = getNombre();
+                tablero.getTablero()[posX][posY] = ".";
+            }
+            
+            setPosX(posXnew);
+            setPosY(posYnew);
+           
+            
         }
     }
 
@@ -92,18 +106,18 @@ public class Fantasmas extends Thread {
         boolean posicionEncontrada = false;
 
         while (!posicionEncontrada) {
-            int posXrandomf1 = random.nextInt(14) + 1;
-            int posYrandomf1 = random.nextInt(18) + 1;
+            int posXrandom = random.nextInt(14) + 1;
+            int posYrandom = random.nextInt(18) + 1;
 
-            if (!matriz[posXrandomf1][posYrandomf1].equals("F") ||
-                !matriz[posXrandomf1][posYrandomf1].equals("|") ||
-                !matriz[posXrandomf1][posYrandomf1].equals("_") ||
-                !matriz[posXrandomf1][posYrandomf1].equals(tablero.getObjetivos()) ||
-                !matriz[posXrandomf1][posYrandomf1].equals("P")) {
+            if (!matriz[posXrandom][posYrandom].equals("F") &&
+                !matriz[posXrandom][posYrandom].equals("|") &&
+                !matriz[posXrandom][posYrandom].equals("_") &&
+                !matriz[posXrandom][posYrandom].equals(tablero.getObjetivos()) &&
+                !matriz[posXrandom][posYrandom].equals("P")) {
                 
-                matriz[posXrandomf1][posYrandomf1] = getNombre();
-                setPosX(posXrandomf1);
-                setPosY(posYrandomf1);
+                matriz[posXrandom][posYrandom] = getNombre();
+                setPosX(posXrandom);
+                setPosY(posYrandom);
                 posicionEncontrada = true;
             }
         }

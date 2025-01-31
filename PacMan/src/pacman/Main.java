@@ -35,7 +35,7 @@ public class Main {
         }
 
         
-        Fantasmas f1 = new Fantasmas(tablero, 6, 9);
+        Fantasmas f1 = new Fantasmas(tablero, 9, 12);
         Fantasmas f2 = new Fantasmas(tablero);
         Fantasmas f3 = new Fantasmas(tablero);
 
@@ -47,12 +47,15 @@ public class Main {
         f1.start();
         f2.start();
         f3.start();
-        pacman.start();
+        //pacman.start();
 
         
         while (!tablero.juegoTerminado()) {
+            
+            
             tablero.mostrarTablero();
             tablero.mostrarEstadisticas();
+            System.out.println("");
 
             try {
                 Thread.sleep(1000); 

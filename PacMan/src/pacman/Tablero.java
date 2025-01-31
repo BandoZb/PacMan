@@ -196,18 +196,43 @@ public class Tablero {
         this.direccionPacman = direccionPacman;
     }
 
-    public boolean esMovimientoValido(int y, int x, String personaje) {
+    public boolean esMovimientoValido(int x, int y, String personaje) {
         boolean esValido = false;
+        /*
         if ((x >= 0) && (x < tablero[0].length) && (y >= 0) && (x < tablero[0].length) && (y < tablero.length)) {
 
-            if ((personaje.equals("pacman") && tablero[y][x].equals("F"))) {
+            if ((personaje.equals("pacman") && tablero[x][y].equals("F"))) {
                 pacmanAtrapado();
-            } else if (((tablero[y][x].equals(".") || tablero[y][x].equals(" ") || tablero[y][x].equals("O")))) {
+            } else if (((tablero[x][y].equals(".") || tablero[x][y].equals(" ") || tablero[x][y].equals("O")))) {
                 esValido = true;
             }
         }
         return esValido;
-
+*/      
+        if(tablero[x][y].contains(".") || tablero[x][y].contains(" ")){
+            
+            if(personaje.equals(pacman.getNombre())){
+                if(tablero[x][y].equals(objetivo) || tablero[x][y].equals(".") || tablero[x][y].equals(" ")){
+                    esValido = true;
+                }
+            }
+            else if(personaje.equals("F")){
+                
+                if(tablero[x][y].equals(objetivo)){
+                }
+                else if(tablero[x][y].equals(pacman.getNombre())){
+                    pacmanAtrapado();
+                }
+                else{
+                    esValido = true;
+                }
+            }
+            else{
+                System.out.println("Error Metodo 'esMovimientoValido' clase Tablero.java");
+            }
+        }
+        
+        return esValido;
     }
 
     private void pacmanAtrapado() {
@@ -228,17 +253,26 @@ public class Tablero {
 
         switch (direccionPacman) {
             case "ARRIBA":
-                posX--;
+                posXnew--;
             case "DERECHA":
-                posY++;
+                posYnew++;
             case "ABAJO":
-                posX++;
+                posXnew++;
             case "IZQUIERDA":
-                posY--;
+                posYnew--;
 
         }
-
+        
         if (esMovimientoValido(posXnew, posYnew, pacman.getNombre())) {
+            
+            
+            if(tablero[posXnew][posYnew].equals(" ")){
+                tablero[posXnew][posYnew] = pacman.getNombre();
+                tablero[posX][posY] = " ";
+            }
+            else{
+            }
+            
             if (tablero[posXnew][posYnew].equals(objetivo)) {
                 int objetivosConsumidos = pacman.getObjetivosConsumidos();
                 objetivosConsumidos++;
@@ -246,6 +280,7 @@ public class Tablero {
 
             } else if (tablero[posXnew][posYnew].equals(".")) {
                 puntuacion++;
+                tablero[posX][posY] = "";
             } else if (tablero[posXnew][posYnew] == tablero[posicionY / 2 - 1][0]) {
                 pacman.setPosX(6);
                 pacman.setPosY(18);
