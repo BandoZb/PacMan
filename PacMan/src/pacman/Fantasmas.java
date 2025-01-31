@@ -87,7 +87,7 @@ public class Fantasmas extends Thread {
             
             if(tablero.getTablero()[posXnew][posYnew].equals(" ")){
                 tablero.getTablero()[posXnew][posYnew] = getNombre();
-                tablero.getTablero()[posX][posY] = "";
+                tablero.getTablero()[posX][posY] = " ";
             }
             else{
                 tablero.getTablero()[posXnew][posYnew] = getNombre();

@@ -35,7 +35,7 @@ public class Main {
         }
 
         
-        Fantasmas f1 = new Fantasmas(tablero, 9, 12);
+        Fantasmas f1 = new Fantasmas(tablero, 6, 9);
         Fantasmas f2 = new Fantasmas(tablero);
         Fantasmas f3 = new Fantasmas(tablero);
 
@@ -48,6 +48,32 @@ public class Main {
         f2.start();
         f3.start();
         //pacman.start();
+        
+        try {
+            System.out.println("The game starts in : 3");
+            System.out.println("");
+                Thread.sleep(1000); 
+            } catch (InterruptedException e) {
+                System.out.println("Juego interrumpido: " + e.getMessage());
+            }
+        
+        try {
+            System.out.println("The game starts in : 2");
+            System.out.println("");
+                Thread.sleep(1000); 
+            } catch (InterruptedException e) {
+                System.out.println("Juego interrumpido: " + e.getMessage());
+            }
+        
+        try {
+            System.out.println("The game starts in : 1");
+            System.out.println("");
+                Thread.sleep(1000); 
+            } catch (InterruptedException e) {
+                System.out.println("Juego interrumpido: " + e.getMessage());
+            }
+        
+        
 
         
         while (!tablero.juegoTerminado()) {
