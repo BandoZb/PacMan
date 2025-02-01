@@ -1,28 +1,26 @@
-
 package pacman;
 
+public class Pacman extends Thread {
 
-public class Pacman extends Thread{
-    
-   private String nombre = "P";
-   private int ObjetivosConsumidos;
-   private int vidasRestantes;
-   private int posX;
-   private int posY; 
-   private Tablero tablero;
+    private String nombre = "P";
+    private int ObjetivosConsumidos;
+    private int vidasRestantes;
+    private int posX;
+    private int posY;
+    private Tablero tablero;
 
     public Pacman(Tablero tablero) {
         this.tablero = tablero;
     }
-   public Pacman( ) {
-        
+
+    public Pacman() {
+
     }
-   
-   
-   @Override
-   public void run() {
-       
-       while (!tablero.juegoTerminado()) {
+
+    @Override
+    public void run() {
+
+        while (!tablero.juegoTerminado()) {
             tablero.moverPacman();
             try {
                 Thread.sleep(1000);
@@ -31,10 +29,18 @@ public class Pacman extends Thread{
             }
 
         }
-   }
+    }
 
     public String getNombre() {
         return nombre;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
     }
 
     public int getPosX() {
@@ -68,9 +74,5 @@ public class Pacman extends Thread{
     public void setObjetivosConsumidos(int ObjetivosConsumidos) {
         this.ObjetivosConsumidos = ObjetivosConsumidos;
     }
-    
- 
-   
-    
-    
+
 }

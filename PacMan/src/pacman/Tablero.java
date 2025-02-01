@@ -11,8 +11,6 @@ public class Tablero {
     private int posicionY;
     private String[][] tablero;
 
-    
-
     private String objetivo = "O";
     private int tiempo = 90;
     private int puntuacion = 0;
@@ -35,7 +33,6 @@ public class Tablero {
     public void setPacman(Pacman pacman) {
         this.pacman = pacman;
     }
-    
 
     public int getPosicionX() {
         return posicionX;
@@ -69,7 +66,6 @@ public class Tablero {
         this.tablero = tablero;
     }
 
-    
     public void crearTablero() {
 
         for (int i = 0; i < posicionY; i++) {
@@ -153,9 +149,6 @@ public class Tablero {
         tablero[13][2] = objetivo;
         tablero[13][15] = objetivo;
 
-        // Creacion Fantasmas
-        // fantasmasRandoms();
-
         // Creacion PacMan
         tablero[13][9] = pacman.getNombre();
         pacman.setPosX(13);
@@ -172,7 +165,6 @@ public class Tablero {
         }
     }
 
-
     public int getPuntuacion() {
         return puntuacion;
     }
@@ -182,7 +174,7 @@ public class Tablero {
     }
 
     public boolean juegoTerminado() {
-        return ((pacman.getObjetivosConsumidos() == 4) || (tiempo == 0) || (pacman.getVidasRestantes() == 0) || (puntuacion == 180));
+        return ((pacman.getObjetivosConsumidos() == 4) || (tiempo == 0) || (pacman.getVidasRestantes() == 0) || (puntuacion == 100));
     }
 
     public void mostrarEstadisticas() {
@@ -190,6 +182,7 @@ public class Tablero {
         System.out.println("Puntuacion : " + puntuacion);
         System.out.println("Tiempo : " + tiempo);
         System.out.println("Vidas : " + pacman.getVidasRestantes());
+        System.out.println("Objetivos : " +pacman.getObjetivosConsumidos());
     }
 
     public void setDireccionPacman(String direccionPacman) {
@@ -208,30 +201,26 @@ public class Tablero {
             }
         }
         return esValido;
-*/      
-        if(tablero[x][y].contains(".") || tablero[x][y].contains(" ")){
-            
-            if(personaje.equals(pacman.getNombre())){
-                if(tablero[x][y].equals(objetivo) || tablero[x][y].equals(".") || tablero[x][y].equals(" ")){
+         */
+        if (tablero[x][y].contains(".") || tablero[x][y].contains(" ") || tablero[x][y].contains(objetivo)) {
+
+            if (personaje.equals(pacman.getNombre())) {
+                if (tablero[x][y].equals(objetivo) || tablero[x][y].equals(".") || tablero[x][y].equals(" ")) {
                     esValido = true;
                 }
-            }
-            else if(personaje.equals("F")){
-                
-                if(tablero[x][y].equals(objetivo)){
-                }
-                else if(tablero[x][y].equals(pacman.getNombre())){
+            } else if (personaje.equals("F")) {
+
+                if (tablero[x][y].equals(objetivo)) {
+                } else if (tablero[x][y].equals(pacman.getNombre())) {
                     pacmanAtrapado();
-                }
-                else{
+                } else {
                     esValido = true;
                 }
-            }
-            else{
+            } else {
                 System.out.println("Error Metodo 'esMovimientoValido' clase Tablero.java");
             }
         }
-        
+
         return esValido;
     }
 
@@ -254,18 +243,46 @@ public class Tablero {
         switch (direccionPacman) {
             case "ARRIBA":
                 posXnew--;
+                break;
             case "DERECHA":
                 posYnew++;
+                break;
             case "ABAJO":
                 posXnew++;
+                break;
             case "IZQUIERDA":
                 posYnew--;
-
+                break;
         }
-        
+
+        if (posXnew == 6 && posYnew == 0) {
+            posYnew = 18;
+        } else if (posXnew == 6 && posYnew == 18) {
+            posYnew = 0;
+        }
+
         if (esMovimientoValido(posXnew, posYnew, pacman.getNombre())) {
-            
-            
+            if (tablero[posXnew][posYnew].equals(" ")) {
+                tablero[posX][posY] = " ";
+                tablero[posXnew][posYnew] = pacman.getNombre();
+            } else if (tablero[posXnew][posYnew].equals(objetivo)) {
+                tablero[posX][posY] = " ";
+                tablero[posXnew][posYnew] = pacman.getNombre();
+                pacman.setObjetivosConsumidos(pacman.getObjetivosConsumidos() + 1);
+            } else if (tablero[posXnew][posYnew].equals(".")) {
+                puntuacion++;
+                tablero[posX][posY] = " ";
+                tablero[posXnew][posYnew] = pacman.getNombre();
+            } else if (tablero[posXnew][posYnew].equals("F")) {
+                pacman.setVidasRestantes(pacman.getVidasRestantes() - 1);
+            }
+
+            pacman.setPosX(posXnew);
+            pacman.setPosY(posYnew);
+        }
+    }
+
+    /*
             if(tablero[posXnew][posYnew].equals(" ")){
                 tablero[posXnew][posYnew] = pacman.getNombre();
                 tablero[posX][posY] = " ";
@@ -280,7 +297,7 @@ public class Tablero {
 
             } else if (tablero[posXnew][posYnew].equals(".")) {
                 puntuacion++;
-                tablero[posX][posY] = "";
+                tablero[posX][posY] = " ";
             } else if (tablero[posXnew][posYnew] == tablero[posicionY / 2 - 1][0]) {
                 pacman.setPosX(6);
                 pacman.setPosY(18);
@@ -290,10 +307,5 @@ public class Tablero {
                 pacman.setPosY(0);
 
             }
-
-        }
-
-    }
-    
-    
+     */
 }

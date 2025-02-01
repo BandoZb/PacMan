@@ -5,38 +5,57 @@ import java.util.logging.Logger;
 import java.util.Random;
 
 public class Fantasmas extends Thread {
+
     private String nombre = "F";
     private int posX;
     private int posY;
-    private Tablero tablero;
-    private Random random; 
 
-    
+    private int posXold;
+    private int posyold;
+
+    private Tablero tablero;
+    private Random random;
+
     public Fantasmas(Tablero tablero) {
         this.tablero = tablero;
-        this.random = new Random(); 
+        this.random = new Random();
         fantasmasRandoms();
     }
 
-    
     public Fantasmas(Tablero tablero, int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
         this.tablero = tablero;
-        this.random = new Random(); 
+        this.random = new Random();
         tablero.getTablero()[posX][posY] = getNombre();
     }
 
     @Override
     public void run() {
         while (!tablero.juegoTerminado()) {
-            moverFantasma(posX, posY);
+            moverFantasma(posX, posY, posXold, posXold);
             try {
                 sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Fantasmas.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public int getPosXold() {
+        return posXold;
+    }
+
+    public void setPosXold(int posXold) {
+        this.posXold = posXold;
+    }
+
+    public int getPosYold() {
+        return posyold;
+    }
+
+    public void setPosYold(int posyold) {
+        this.posyold = posyold;
     }
 
     public String getNombre() {
@@ -59,9 +78,19 @@ public class Fantasmas extends Thread {
         this.posY = posY;
     }
 
-    public void moverFantasma(int posX, int posY) {
-        int movimiento = random.nextInt(4) + 1; // Generar un número entre 1 y 4 para elegir a donde se movera el fantasma
-        
+    /**
+     * Este metodo coge los parametros seleccionados y permite mover a los
+     * fantasmas dejando atras "." o " " según lo q habia, controla q no pueda
+     * atravesar paredes
+     *
+     * @param posX
+     * @param posY
+     * @param posXold
+     * @param posYold
+     */
+    public void moverFantasma(int posX, int posY, int posXold, int posYold) {
+        int movimiento = random.nextInt(4) + 1;
+
         int posXnew = posX;
         int posYnew = posY;
 
@@ -79,11 +108,37 @@ public class Fantasmas extends Thread {
                 posYnew--;
                 break;
         }
-             
-        
+
         // Validar el nuevo movimiento antes de actualizar las coordenadas
+        /*
         if (tablero.esMovimientoValido(posXnew, posYnew, nombre)) {
+            if (tablero.getTablero()[posXnew][posYnew].equals(" ")) {
+                tablero.getTablero()[posX][posY] = tablero.getTablero()[posXold][posYold];
+                posXold = posXnew;
+                posYold = posYnew;
+                tablero.getTablero()[posXnew][posYnew] = getNombre();
+                posX = posXnew;
+                posY = posYnew;
                 
+                
+             
+                
+            } else {
+
+                tablero.getTablero()[posX][posY] = tablero.getTablero()[posXold][posYold];
+                posXold = posXnew;
+                posYold = posYnew;
+                tablero.getTablero()[posXnew][posYnew] = getNombre();
+                posX = posXnew;
+                posY = posYnew;
+            }
+
+            setPosX(posXnew);
+            setPosY(posYnew);
+
+        }
+        */
+        if (tablero.esMovimientoValido(posXnew, posYnew, nombre)) {
             
             if(tablero.getTablero()[posXnew][posYnew].equals(" ")){
                 tablero.getTablero()[posXnew][posYnew] = getNombre();
@@ -109,12 +164,12 @@ public class Fantasmas extends Thread {
             int posXrandom = random.nextInt(14) + 1;
             int posYrandom = random.nextInt(18) + 1;
 
-            if (!matriz[posXrandom][posYrandom].equals("F") &&
-                !matriz[posXrandom][posYrandom].equals("|") &&
-                !matriz[posXrandom][posYrandom].equals("_") &&
-                !matriz[posXrandom][posYrandom].equals(tablero.getObjetivos()) &&
-                !matriz[posXrandom][posYrandom].equals("P")) {
-                
+            if (!matriz[posXrandom][posYrandom].equals("F")
+                    && !matriz[posXrandom][posYrandom].equals("|")
+                    && !matriz[posXrandom][posYrandom].equals("_")
+                    && !matriz[posXrandom][posYrandom].equals(tablero.getObjetivos())
+                    && !matriz[posXrandom][posYrandom].equals("P")) {
+
                 matriz[posXrandom][posYrandom] = getNombre();
                 setPosX(posXrandom);
                 setPosY(posYrandom);
