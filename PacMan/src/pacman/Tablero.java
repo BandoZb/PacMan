@@ -12,6 +12,7 @@ public class Tablero {
     private String[][] tablero;
 
     private String objetivo = "O";
+    
     private int tiempo = 150;
     private int puntuacion = 0;
     private Pacman pacman = new Pacman();
@@ -190,7 +191,7 @@ public class Tablero {
     }
 
     public boolean juegoTerminado() {
-        return ((pacman.getObjetivosConsumidos() == 4) || (tiempo == 0) || (pacman.getVidasRestantes() == 0) || (puntuacion == 100));
+        return ((pacman.getObjetivosConsumidos() == 4) || (tiempo == 0) || (pacman.getVidasRestantes() == 0) || (puntuacion == 75));
     }
 
     public void mostrarEstadisticas() {
@@ -198,7 +199,7 @@ public class Tablero {
         System.out.println("Puntuacion : " + puntuacion);
         System.out.println("Tiempo : " + tiempo);
         System.out.println("Vidas : " + pacman.getVidasRestantes());
-        System.out.println("Objetivos : " +pacman.getObjetivosConsumidos());
+        System.out.println("Objetivos : " + pacman.getObjetivosConsumidos());
     }
 
     public void setDireccionPacman(String direccionPacman) {
@@ -229,6 +230,7 @@ public class Tablero {
                 if (tablero[x][y].equals(objetivo)) {
                 } else if (tablero[x][y].equals(pacman.getNombre())) {
                     pacmanAtrapado();
+                } else if (tablero[x][y] == tablero[6][0] || tablero[x][y] == tablero[6][18]) {
                 } else {
                     esValido = true;
                 }
@@ -291,6 +293,7 @@ public class Tablero {
                 tablero[posXnew][posYnew] = pacman.getNombre();
             } else if (tablero[posXnew][posYnew].equals("F")) {
                 pacman.setVidasRestantes(pacman.getVidasRestantes() - 1);
+                pacmanAtrapado();
             }
 
             pacman.setPosX(posXnew);

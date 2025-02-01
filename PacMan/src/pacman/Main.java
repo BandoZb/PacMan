@@ -20,7 +20,7 @@ public class Main {
                            
                            Elige la dificultad pulsando un número
                            
-                           1. Fácil   2. Medio   3. Difícil  4. Hardcore ( mantenimiento )
+                           1. Fácil   2. Medio   3. Difícil  4. Hardcore
                            
                            """);
 
@@ -32,8 +32,10 @@ public class Main {
             pacman.setVidasRestantes(3);
         } else if (dificultad == 2) {
             pacman.setVidasRestantes(2);
+            tablero.setTiempo(130);
         } else if (dificultad == 3) {
             pacman.setVidasRestantes(1);
+            tablero.setTiempo(110);
         } else {
             pacman.setVidasRestantes(1);
             tablero.setTiempo(90);
@@ -101,6 +103,7 @@ public class Main {
             int tiempo = tablero.getTiempo();
             tiempo--;
             tablero.setTiempo(tiempo);
+            
             try {
                 Thread.sleep(1000);
 
