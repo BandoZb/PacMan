@@ -1,6 +1,8 @@
 package pacman;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -8,8 +10,12 @@ public class Main {
     public static void main(String[] args) {
 
         Pacman pacman = new Pacman();
-        Tablero tablero = new Tablero(15, 19, pacman);
+        Tablero tablero = new Tablero(15, 19, pacman, null);
         pacman.setTablero(tablero);
+
+        ArrayList<Fantasmas> fantasmasList = new ArrayList<>();
+        
+        tablero.setFantasmasList(fantasmasList);
 
         boolean dificultadValida = false;
 
@@ -73,12 +79,9 @@ public class Main {
 
         pedirDireccion.start();
 
-        f1.start();
-        f2.start();
-        f3.start();
         pacman.start();
-        
-        if(dificultad == 4){
+
+        if (dificultad == 4) {
             Fantasmas f4 = new Fantasmas(tablero);
             Fantasmas f5 = new Fantasmas(tablero);
             Fantasmas f6 = new Fantasmas(tablero);
@@ -86,13 +89,22 @@ public class Main {
             Fantasmas f8 = new Fantasmas(tablero);
             Fantasmas f9 = new Fantasmas(tablero);
             Fantasmas f10 = new Fantasmas(tablero);
-            f4.start();
-            f5.start();
-            f6.start();
-            f7.start();
-            f8.start();
-            f9.start();
-            f10.start();
+            fantasmasList.add(f4);
+            fantasmasList.add(f5);
+            fantasmasList.add(f6);
+            fantasmasList.add(f7);
+            fantasmasList.add(f8);
+            fantasmasList.add(f9);
+            fantasmasList.add(f10);
+        }
+
+        // Añadir todos los fantasmas creados al ArrayList
+        fantasmasList.add(f1);
+        fantasmasList.add(f2);
+        fantasmasList.add(f3);
+
+        for (Fantasmas fantasma : fantasmasList) {
+            fantasma.start();
         }
 
         while (!tablero.juegoTerminado()) {
@@ -103,8 +115,9 @@ public class Main {
             int tiempo = tablero.getTiempo();
             tiempo--;
             tablero.setTiempo(tiempo);
-            
+
             try {
+                
                 Thread.sleep(1000);
 
             } catch (InterruptedException e) {
@@ -120,14 +133,14 @@ public class Main {
             default ->
                 "difícil";
         };
-        
-        if(tablero.getTiempo() == 0){
-            System.out.println("PERDISTE 😭 , EL CONTADOR LLEGO A 0");
-        }
-        else if(pacman.getVidasRestantes() == 0){
+
+        if (tablero.getTiempo() == 0) {
+            System.out.println("PERDISTE 😭 , EL TIEMPO LLEGO A 0");
+        } else if (pacman.getVidasRestantes() == 0) {
             System.out.println("PERDISTE 😭 , TE QUEDASTE SIN VIDAS");
+        } else if (pacman.getVidasRestantes() < 0) {
+            System.out.println("Felicidades, has superado la modalidad " + dificultadPalabra);
         }
 
-        System.out.println("Felicidades, has superado la modalidad " + dificultadPalabra);
     }
 }

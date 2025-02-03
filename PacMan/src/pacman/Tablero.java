@@ -1,6 +1,9 @@
 package pacman;
 
+import java.util.ArrayList;
+import java.util.List;
 import pacman.Pacman;
+import pacman.Main;
 import pacman.Fantasmas;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
@@ -12,19 +15,26 @@ public class Tablero {
     private String[][] tablero;
 
     private String objetivo = "O";
-    
+
     private int tiempo = 150;
     private int puntuacion = 0;
     private Pacman pacman = new Pacman();
     private final Semaphore semaforoTablero = new Semaphore(1);
 
-    private String direccionPacman = "ARRIBA";
+    private ArrayList<Fantasmas> fantasmasList;
 
-    public Tablero(int posicionY, int posicionX, Pacman pacman) {
+    private String direccionPacman = "ABAJO";
+
+    public Tablero(int posicionY, int posicionX, Pacman pacman , ArrayList<Fantasmas> fantasmasList) {
         this.posicionY = posicionY;
         this.posicionX = posicionX;
         this.pacman = pacman;
+        this.fantasmasList = fantasmasList;
         this.tablero = new String[posicionY][posicionX];
+    }
+
+    public void setFantasmasList(ArrayList<Fantasmas> fantasmasList) {
+        this.fantasmasList = fantasmasList;
     }
 
     public Pacman getPacman() {
@@ -219,15 +229,19 @@ public class Tablero {
         }
         return esValido;
          */
-        if (tablero[x][y].contains(".") || tablero[x][y].contains(" ") || tablero[x][y].contains(objetivo)) {
+        if (tablero[x][y].contains(".") || tablero[x][y].contains(" ") || tablero[x][y].contains(objetivo) || tablero[x][y].contains("P") || tablero[x][y].contains("F")) {
 
             if (personaje.equals(pacman.getNombre())) {
                 if (tablero[x][y].equals(objetivo) || tablero[x][y].equals(".") || tablero[x][y].equals(" ")) {
                     esValido = true;
                 }
+                else if(tablero[x][y].equals("F")){
+                    pacmanAtrapado();
+                }
             } else if (personaje.equals("F")) {
 
                 if (tablero[x][y].equals(objetivo)) {
+                } else if (tablero[x][y].equals("F")) {
                 } else if (tablero[x][y].equals(pacman.getNombre())) {
                     pacmanAtrapado();
                 } else if (tablero[x][y] == tablero[6][0] || tablero[x][y] == tablero[6][18]) {
@@ -244,11 +258,31 @@ public class Tablero {
 
     private void pacmanAtrapado() {
         System.out.println("Pacman fue atrapado");
-        if (pacman.getVidasRestantes() == 0) {
 
+        pacman.setVidasRestantes(pacman.getVidasRestantes() - 1);
+
+        if (pacman.getVidasRestantes() == 0) {
+            System.out.println(" GAAAAAME OVEEEEEEEEEEEEER ");
         } else {
-            System.out.println("");
-            System.out.println("Reset del mapa");
+            System.out.println("\nReset del mapa");
+
+            // Reset posición Pacman 
+            tablero[pacman.getPosX()][pacman.getPosY()] = " ";
+            tablero[13][9] = pacman.getNombre();
+            pacman.setPosX(13);
+            pacman.setPosY(9);
+
+            direccionPacman = "ABAJO";
+
+            // Reset posición de los fantasmas
+            for (Fantasmas fantasma : fantasmasList) {
+                fantasma.resetPosicion();
+            }
+            
+            if( pacman.getVidasRestantes() > 0){
+              esperarAntesDeContinuar();  
+            }
+            
         }
     }
 
@@ -327,4 +361,27 @@ public class Tablero {
 
             }
      */
+    
+    /**
+     * Este metodo se utiliza para cuando atrapen a Pacman
+     * se mantenga 3s de couldown mientras resetea las 
+     * posiciones de los Fantasmas y Pacman
+     * 
+     */
+    
+    private void esperarAntesDeContinuar() {
+    try {
+        Thread.sleep(1000);
+        System.out.println("The game starts in :  3 ");
+        Thread.sleep(1000);
+        System.out.println("The game starts in :  2 ");
+        Thread.sleep(1000);
+        System.out.println("The game starts in :  1 ");
+        Thread.sleep(1000);
+        System.out.println("START");
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
 }

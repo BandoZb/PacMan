@@ -13,6 +13,9 @@ public class Fantasmas extends Thread {
     private int posXold;
     private int posyold;
 
+    private int posXinicial;
+    private int posYinicial;
+
     private Tablero tablero;
     private Random random;
 
@@ -20,6 +23,10 @@ public class Fantasmas extends Thread {
         this.tablero = tablero;
         this.random = new Random();
         fantasmasRandoms();
+
+        this.posXinicial = posX;
+        this.posYinicial = posY;
+
     }
 
     public Fantasmas(Tablero tablero, int posX, int posY) {
@@ -27,6 +34,9 @@ public class Fantasmas extends Thread {
         this.posY = posY;
         this.tablero = tablero;
         this.random = new Random();
+
+        this.posXinicial = posX;
+        this.posYinicial = posY;
         tablero.getTablero()[posX][posY] = getNombre();
     }
 
@@ -137,22 +147,20 @@ public class Fantasmas extends Thread {
             setPosY(posYnew);
 
         }
-        */
+         */
         if (tablero.esMovimientoValido(posXnew, posYnew, nombre)) {
-            
-            if(tablero.getTablero()[posXnew][posYnew].equals(" ")){
+
+            if (tablero.getTablero()[posXnew][posYnew].equals(" ")) {
                 tablero.getTablero()[posXnew][posYnew] = getNombre();
                 tablero.getTablero()[posX][posY] = " ";
-            }
-            else{
+            } else {
                 tablero.getTablero()[posXnew][posYnew] = getNombre();
                 tablero.getTablero()[posX][posY] = ".";
             }
-            
+
             setPosX(posXnew);
             setPosY(posYnew);
-           
-            
+
         }
     }
 
@@ -176,5 +184,12 @@ public class Fantasmas extends Thread {
                 posicionEncontrada = true;
             }
         }
+    }
+
+    public void resetPosicion() {
+        tablero.getTablero()[posX][posY] = " ";
+        this.posX = posXinicial;
+        this.posY = posYinicial;
+        tablero.getTablero()[posXinicial][posYinicial] = nombre;
     }
 }
