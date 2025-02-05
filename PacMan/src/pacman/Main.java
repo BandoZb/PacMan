@@ -109,12 +109,24 @@ public class Main {
 
         while (!tablero.juegoTerminado()) {
 
+            if(tablero.isPacmanAtrapadoHilo() == true){
+                try{
+                    Thread.sleep(6000);
+                    tablero.setPacmanAtrapadoHilo(false);
+                }
+                catch (InterruptedException e) {
+                System.out.println("Juego interrumpido: " + e.getMessage());
+                }
+            }
+            
             tablero.mostrarTablero();
             tablero.mostrarEstadisticas();
             System.out.println("");
             int tiempo = tablero.getTiempo();
             tiempo--;
             tablero.setTiempo(tiempo);
+            
+            
 
             try {
                 

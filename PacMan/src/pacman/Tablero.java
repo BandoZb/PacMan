@@ -13,6 +13,7 @@ public class Tablero {
     private int posicionX;
     private int posicionY;
     private String[][] tablero;
+    private boolean pacmanAtrapadoHilo = false;
 
     private String objetivo = "O";
 
@@ -31,6 +32,14 @@ public class Tablero {
         this.pacman = pacman;
         this.fantasmasList = fantasmasList;
         this.tablero = new String[posicionY][posicionX];
+    }
+
+    public boolean isPacmanAtrapadoHilo() {
+        return pacmanAtrapadoHilo;
+    }
+
+    public void setPacmanAtrapadoHilo(boolean pacmanAtrapadoHilo) {
+        this.pacmanAtrapadoHilo = pacmanAtrapadoHilo;
     }
 
     public void setFantasmasList(ArrayList<Fantasmas> fantasmasList) {
@@ -258,6 +267,7 @@ public class Tablero {
 
     private void pacmanAtrapado() {
         System.out.println("Pacman fue atrapado");
+        setPacmanAtrapadoHilo(true);
 
         pacman.setVidasRestantes(pacman.getVidasRestantes() - 1);
 
@@ -277,10 +287,12 @@ public class Tablero {
             // Reset posición de los fantasmas
             for (Fantasmas fantasma : fantasmasList) {
                 fantasma.resetPosicion();
+                
             }
             
             if( pacman.getVidasRestantes() > 0){
-              esperarAntesDeContinuar();  
+                
+                esperarAntesDeContinuar();  
             }
             
         }
@@ -321,6 +333,7 @@ public class Tablero {
                 tablero[posX][posY] = " ";
                 tablero[posXnew][posYnew] = pacman.getNombre();
                 pacman.setObjetivosConsumidos(pacman.getObjetivosConsumidos() + 1);
+                puntuacion = puntuacion + 5;
             } else if (tablero[posXnew][posYnew].equals(".")) {
                 puntuacion++;
                 tablero[posX][posY] = " ";
@@ -371,14 +384,14 @@ public class Tablero {
     
     private void esperarAntesDeContinuar() {
     try {
+        Thread.sleep(2000);
+        System.out.println("The game starts in :  3 \n");
         Thread.sleep(1000);
-        System.out.println("The game starts in :  3 ");
+        System.out.println("The game starts in :  2 \n");
         Thread.sleep(1000);
-        System.out.println("The game starts in :  2 ");
+        System.out.println("The game starts in :  1 \n");
         Thread.sleep(1000);
-        System.out.println("The game starts in :  1 ");
-        Thread.sleep(1000);
-        System.out.println("START");
+        System.out.println("START\n\n\n");
         Thread.sleep(1000);
     } catch (InterruptedException e) {
         e.printStackTrace();

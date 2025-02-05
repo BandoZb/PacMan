@@ -8,6 +8,7 @@ public class Pacman extends Thread {
     private int posX;
     private int posY;
     private Tablero tablero;
+    
 
     public Pacman(Tablero tablero) {
         this.tablero = tablero;
