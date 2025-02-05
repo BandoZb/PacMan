@@ -6,7 +6,8 @@ Tiene mecanicas simples de movimiento
 ## Características
 - 🎮 Movimiento del personaje controlado por el usuario.
 - 👾 Enemigos que siguen al jugador.
-- 🚀 Compatible con cualquier IDE que soporte Java
+- 🚀 Desarrollado en Neatbeans23
+- 📙 Lenguaje Java , necesita JDK23
 ---
 
 ## Notas del parche 1.1
