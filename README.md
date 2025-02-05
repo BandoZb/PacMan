@@ -13,8 +13,8 @@ Tiene mecanicas simples de movimiento
 ## Notas del parche 1.1
 
 - Modo hardcore con 10 fantasma, menos tiempo y solo 1 vida
-- Solo se puede ganar commiedo los 4 objetivos, la puntuacion solo sera un extra
-- Más tiempo en el reset del mapa cuando te atrapan
+- Solo se puede ganar comiendo los 4 objetivos, la puntuacion solo sera un extra
+- Mas tiempo en el reset del mapa cuando te atrapan
 
 ## Cómo jugar
 
