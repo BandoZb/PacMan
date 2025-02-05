@@ -210,7 +210,7 @@ public class Tablero {
     }
 
     public boolean juegoTerminado() {
-        return ((pacman.getObjetivosConsumidos() == 4) || (tiempo == 0) || (pacman.getVidasRestantes() == 0) || (puntuacion == 75));
+        return ((pacman.getObjetivosConsumidos() == 4) || (tiempo == 0) || (pacman.getVidasRestantes() == 0));
     }
 
     public void mostrarEstadisticas() {
@@ -333,7 +333,7 @@ public class Tablero {
                 tablero[posX][posY] = " ";
                 tablero[posXnew][posYnew] = pacman.getNombre();
                 pacman.setObjetivosConsumidos(pacman.getObjetivosConsumidos() + 1);
-                puntuacion = puntuacion + 5;
+                puntuacion = puntuacion + 20;
             } else if (tablero[posXnew][posYnew].equals(".")) {
                 puntuacion++;
                 tablero[posX][posY] = " ";

@@ -150,8 +150,9 @@ public class Main {
             System.out.println("PERDISTE 😭 , EL TIEMPO LLEGO A 0");
         } else if (pacman.getVidasRestantes() == 0) {
             System.out.println("PERDISTE 😭 , TE QUEDASTE SIN VIDAS");
-        } else if (pacman.getVidasRestantes() < 0) {
+        } else {
             System.out.println("Felicidades, has superado la modalidad " + dificultadPalabra);
+            System.out.println("\nGanaste con un total de "+tablero.getPuntuacion() +" puntos.");
         }
 
     }
