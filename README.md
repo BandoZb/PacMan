@@ -31,4 +31,4 @@ Tiene mecanicas simples de movimiento
 3. En caso de que no este inicializado con git, escriba el comando git init
 4. Clona este repositorio:
  
-   git clone https://github.com/BandoZb/pacman-consola.git
+   git clone https://github.com/BandoZb/PacMan.git
