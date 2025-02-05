@@ -118,36 +118,6 @@ public class Fantasmas extends Thread {
                 posYnew--;
                 break;
         }
-
-        // Validar el nuevo movimiento antes de actualizar las coordenadas
-        /*
-        if (tablero.esMovimientoValido(posXnew, posYnew, nombre)) {
-            if (tablero.getTablero()[posXnew][posYnew].equals(" ")) {
-                tablero.getTablero()[posX][posY] = tablero.getTablero()[posXold][posYold];
-                posXold = posXnew;
-                posYold = posYnew;
-                tablero.getTablero()[posXnew][posYnew] = getNombre();
-                posX = posXnew;
-                posY = posYnew;
-                
-                
-             
-                
-            } else {
-
-                tablero.getTablero()[posX][posY] = tablero.getTablero()[posXold][posYold];
-                posXold = posXnew;
-                posYold = posYnew;
-                tablero.getTablero()[posXnew][posYnew] = getNombre();
-                posX = posXnew;
-                posY = posYnew;
-            }
-
-            setPosX(posXnew);
-            setPosY(posYnew);
-
-        }
-         */
         if (tablero.esMovimientoValido(posXnew, posYnew, nombre)) {
 
             if (tablero.getTablero()[posXnew][posYnew].equals(" ")) {
@@ -164,6 +134,12 @@ public class Fantasmas extends Thread {
         }
     }
 
+    /**
+     * Metodo q genera posiciones randoms para los fantasmas con cada inicio
+     * de una partida nueva, este se metera en el constructor del fantasma
+     * si queremos que se cree con las posiciones random
+     * 
+     */
     public void fantasmasRandoms() {
         String[][] matriz = tablero.getTablero();
         boolean posicionEncontrada = false;
@@ -186,6 +162,11 @@ public class Fantasmas extends Thread {
         }
     }
 
+    /**
+     * Metodo que resetea las posicones actuales de los personajes 
+     * y los pone en su posicion inicial
+     * 
+     */
     public void resetPosicion() {
         tablero.getTablero()[posX][posY] = " ";
         this.posX = posXinicial;

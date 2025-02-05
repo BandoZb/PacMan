@@ -50,7 +50,7 @@ public class Main {
         Fantasmas f1 = new Fantasmas(tablero, 6, 9);
         Fantasmas f2 = new Fantasmas(tablero);
         Fantasmas f3 = new Fantasmas(tablero);
-
+        Fantasmas f4 = new Fantasmas(tablero);
         PedirDireccion pedirDireccion = new PedirDireccion(tablero);
 
         try {
@@ -82,14 +82,13 @@ public class Main {
         pacman.start();
 
         if (dificultad == 4) {
-            Fantasmas f4 = new Fantasmas(tablero);
+
             Fantasmas f5 = new Fantasmas(tablero);
             Fantasmas f6 = new Fantasmas(tablero);
             Fantasmas f7 = new Fantasmas(tablero);
             Fantasmas f8 = new Fantasmas(tablero);
             Fantasmas f9 = new Fantasmas(tablero);
             Fantasmas f10 = new Fantasmas(tablero);
-            fantasmasList.add(f4);
             fantasmasList.add(f5);
             fantasmasList.add(f6);
             fantasmasList.add(f7);
@@ -102,7 +101,8 @@ public class Main {
         fantasmasList.add(f1);
         fantasmasList.add(f2);
         fantasmasList.add(f3);
-
+        fantasmasList.add(f4);
+        
         for (Fantasmas fantasma : fantasmasList) {
             fantasma.start();
         }

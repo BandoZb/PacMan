@@ -102,6 +102,10 @@ public class Tablero {
         this.tablero = tablero;
     }
 
+    /**
+     * Metodo que crea el tablero
+     * 
+     */
     public void crearTablero() {
 
         for (int i = 0; i < posicionY; i++) {
@@ -192,6 +196,10 @@ public class Tablero {
 
     }
 
+    /**
+     * Muestra el tablero 
+     * 
+     */
     public void mostrarTablero() {
         for (int i = 0; i < posicionY; i++) {
             for (int j = 0; j < posicionX; j++) {
@@ -213,6 +221,12 @@ public class Tablero {
         return ((pacman.getObjetivosConsumidos() == 4) || (tiempo == 0) || (pacman.getVidasRestantes() == 0));
     }
 
+    /**
+     * Mostrara las estadisticas base de todo el juego
+     * 
+     * Puntuacion, Tiempo, Vidas del pacman y Objetivos consumidos
+     * 
+     */
     public void mostrarEstadisticas() {
         System.out.println("");
         System.out.println("Puntuacion : " + puntuacion);
@@ -225,6 +239,15 @@ public class Tablero {
         this.direccionPacman = direccionPacman;
     }
 
+    /**
+     * Metodo que comprueba si el personaje, tanto Fantasma como Pacman, pueda moverse
+     * devolviendo un @return de true si es valido o false si no.
+     * 
+     * @param x
+     * @param y
+     * @param personaje
+     * @return 
+     */
     public boolean esMovimientoValido(int x, int y, String personaje) {
         boolean esValido = false;
         /*
@@ -265,6 +288,12 @@ public class Tablero {
         return esValido;
     }
 
+    /**
+     * Metodo que actua siempre que el pacman sea atrapado por un fantasma, en caso
+     * de que pacman se quede sin vidas el juego se finalizara, si no, reseteara todas
+     * las posiciones de los personajes sin cambiar las puntuaciones, objetivos y tiempos
+     * 
+     */
     private void pacmanAtrapado() {
         System.out.println("Pacman fue atrapado");
         setPacmanAtrapadoHilo(true);
@@ -298,6 +327,11 @@ public class Tablero {
         }
     }
 
+    /**
+     * Metodo q mueve el Pacman recibiendo las direcciones indicadas por consola,
+     * comprueba que el movimiento sea valido antes de moverse
+     * 
+     */
     public void moverPacman() {
         int posX = pacman.getPosX();
         int posY = pacman.getPosY();
@@ -348,40 +382,12 @@ public class Tablero {
         }
     }
 
-    /*
-            if(tablero[posXnew][posYnew].equals(" ")){
-                tablero[posXnew][posYnew] = pacman.getNombre();
-                tablero[posX][posY] = " ";
-            }
-            else{
-            }
-            
-            if (tablero[posXnew][posYnew].equals(objetivo)) {
-                int objetivosConsumidos = pacman.getObjetivosConsumidos();
-                objetivosConsumidos++;
-                pacman.setObjetivosConsumidos(objetivosConsumidos);
-
-            } else if (tablero[posXnew][posYnew].equals(".")) {
-                puntuacion++;
-                tablero[posX][posY] = " ";
-            } else if (tablero[posXnew][posYnew] == tablero[posicionY / 2 - 1][0]) {
-                pacman.setPosX(6);
-                pacman.setPosY(18);
-
-            } else if (tablero[posXnew][posYnew] == tablero[posicionY / 2 - 1][posicionX - 1]) {
-                pacman.setPosX(6);
-                pacman.setPosY(0);
-
-            }
-     */
-    
     /**
      * Este metodo se utiliza para cuando atrapen a Pacman
      * se mantenga 3s de couldown mientras resetea las 
      * posiciones de los Fantasmas y Pacman
      * 
-     */
-    
+     */ 
     private void esperarAntesDeContinuar() {
     try {
         Thread.sleep(2000);
