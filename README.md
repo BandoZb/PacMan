@@ -6,14 +6,15 @@ Tiene mecanicas simples de movimiento
 ## Características
 - 🎮 Movimiento del personaje controlado por el usuario.
 - 👾 Enemigos que siguen al jugador.
-- 🚀 Compatible con cualquier IDE que soporte Java
+- 🚀 Desarrollado en Neatbeans23
+- 📙 Lenguaje Java , necesita JDK23
 ---
 
 ## Notas del parche 1.1
 
 - Modo hardcore con 10 fantasma, menos tiempo y solo 1 vida
-- Solo se puede ganar commiedo los 4 objetivos, la puntuacion solo sera un extra
-- Más tiempo en el reset del mapa cuando te atrapan
+- Solo se puede ganar comiendo los 4 objetivos, la puntuacion solo sera un extra
+- Mas tiempo en el reset del mapa cuando te atrapan
 
 ## Cómo jugar
 
@@ -30,4 +31,4 @@ Tiene mecanicas simples de movimiento
 3. En caso de que no este inicializado con git, escriba el comando git init
 4. Clona este repositorio:
  
-   git clone https://github.com/BandoZb/pacman-consola.git
+   git clone https://github.com/BandoZb/PacMan.git
