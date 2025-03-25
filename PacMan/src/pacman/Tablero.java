@@ -1,5 +1,6 @@
 package pacman;
 
+import static java.lang.Math.random;
 import java.util.ArrayList;
 import java.util.List;
 import pacman.Pacman;
@@ -107,6 +108,8 @@ public class Tablero {
      * 
      */
     public void crearTablero() {
+        
+        Random random = new Random();
 
         for (int i = 0; i < posicionY; i++) {
             for (int j = 0; j < posicionX; j++) {
@@ -148,6 +151,12 @@ public class Tablero {
         }
 
         //Rellenos paredes de dentro
+        
+        int mapaTablero = random.nextInt(2) + 1;
+        
+        switch(mapaTablero){
+            case 1:
+                
         tablero[3][2] = "|";
         tablero[4][2] = "|";
         tablero[5][2] = "|";
@@ -177,7 +186,67 @@ public class Tablero {
         tablero[10][16] = "|";
         tablero[3][16] = "|";
         tablero[4][16] = "|";
+                
+                break;
+            case 2:
+        
+        tablero[1][8] = "|";
+        tablero[2][8] = "|";
+        tablero[2][9] = ".";
+        tablero[3][2] = "|";
+        tablero[4][2] = "|";
+        tablero[5][2] = "|";
+        tablero[6][6] = "|";
+        
+        tablero[5][6] = "_";
+        tablero[5][7] = "_";
+        tablero[5][10] = "_";
+        tablero[5][11] = "_";
 
+        tablero[5][12] = "_";
+        tablero[6][12] = "|";
+        
+        tablero[7][4] = ".";
+        tablero[8][2] = "|";
+        tablero[8][15] = "_";
+        tablero[7][17] = "_";
+        tablero[9][2] = "|";
+        
+        tablero[12][2] = "_";
+        tablero[12][3] = ":";1
+        tablero[12][4] = "_";
+        tablero[12][5] = "_";
+        tablero[12][6] = ".";
+        
+        tablero[13][7] = "|";
+        tablero[13][8] = "|";
+        
+        tablero[9][14] = ".";
+        
+        tablero[10][10] = "_";
+        tablero[10][12] = "_";
+        tablero[10][13] = "_";
+        
+        tablero[11][6] = "|";
+        tablero[11][7] = "|";
+        tablero[11][8] = "|";
+        tablero[10][8] = "|";
+
+        tablero[12][10] = "_";
+        tablero[13][10] = "_";
+        tablero[9][9] = "_";
+        tablero[10][9] = "_";
+
+        tablero[12][13] = "_";
+        tablero[11][16] = "_";
+        tablero[10][16] = "_";
+        tablero[3][16] = "_";
+        tablero[4][16] = "_";
+                
+                break;
+        }
+                
+        // Puntos extras  
         tablero[2][6] = ".";
         tablero[2][7] = ".";
         tablero[2][11] = ".";
